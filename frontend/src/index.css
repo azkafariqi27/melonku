@@ -1,0 +1,291 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color: #1b1b1b;
+  background: #f1f8e9;
+  font-family: "Inter", sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  background: #f1f8e9;
+}
+
+button,
+a,
+input {
+  -webkit-tap-highlight-color: transparent;
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible {
+  outline: 3px solid rgba(46, 125, 50, 0.25);
+  outline-offset: 3px;
+}
+
+.container-page {
+  width: min(100% - 32px, 1200px);
+  margin-inline: auto;
+}
+
+@media (min-width: 768px) {
+  .container-page {
+    width: min(100% - 80px, 1200px);
+  }
+}
+
+.card {
+  border-radius: 12px;
+  background: #ffffff;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+}
+
+.status-healthy {
+  background: #e8f5e9;
+  color: #2e7d32;
+}
+
+.status-warning {
+  background: #fff8e1;
+  color: #a0522d;
+}
+
+.status-danger {
+  background: #ffebee;
+  color: #d32f2f;
+}
+
+/* --- ANIMATIONS & INTERACTIONS --- */
+
+/* Native Transitions */
+.transition-all-custom {
+  transition: all 0.25s ease;
+}
+
+/* Navbar & Footer link hover slide-in underline */
+.nav-link-underline, .footer-link {
+  position: relative;
+}
+.nav-link-underline::after, .footer-link::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  transform: scaleX(0);
+  height: 2px;
+  bottom: -2px;
+  left: 0;
+  background-color: currentColor;
+  transform-origin: bottom left;
+  transition: transform 0.2s ease-out;
+}
+.nav-link-underline:hover::after, .footer-link:hover::after {
+  transform: scaleX(1);
+}
+
+/* Button Custom Styles & Ripple */
+.btn-primary-animate {
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+}
+.btn-secondary-animate {
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .btn-primary-animate:hover {
+    transform: scale(1.03);
+    background-color: #1B5E20 !important; /* primary-dark */
+    box-shadow: 0 8px 20px rgba(46, 125, 50, 0.25) !important;
+  }
+  .btn-primary-animate:active {
+    transform: scale(0.97);
+  }
+
+  .btn-secondary-animate:hover {
+    transform: scale(1.03);
+    background-color: rgba(46, 125, 50, 0.1) !important;
+  }
+  .btn-secondary-animate:active {
+    transform: scale(0.97);
+  }
+}
+
+/* Ripple effect markup styles */
+.ripple-effect {
+  position: absolute;
+  border-radius: 50%;
+  transform: scale(0);
+  animation: ripple-animation 0.6s linear;
+  pointer-events: none;
+}
+.ripple-light {
+  background: rgba(255, 255, 255, 0.4);
+}
+.ripple-dark {
+  background: rgba(46, 125, 50, 0.2);
+}
+@keyframes ripple-animation {
+  to {
+    transform: scale(4);
+    opacity: 0;
+  }
+}
+
+/* Hero float image */
+.animate-float {
+  animation: float-anim 3s ease-in-out infinite alternate;
+}
+@keyframes float-anim {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-8px); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .animate-float {
+    animation: none;
+  }
+}
+
+/* Cards Hover Animations */
+.card-cara-kerja {
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.card-cara-kerja::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 4px;
+  height: 100%;
+  background-color: #2E7D32;
+  transform: scaleY(0);
+  transform-origin: top;
+  transition: transform 0.2s ease-out;
+}
+
+.card-jenis-penyakit {
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.card-jenis-penyakit .img-zoom {
+  transition: transform 0.25s ease;
+}
+
+.card-panduan-penyakit {
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.status-healthy, .status-warning, .status-danger {
+  transition: box-shadow 0.25s ease;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .card-cara-kerja:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+  }
+  .card-cara-kerja:hover::before {
+    transform: scaleY(1);
+  }
+
+  .card-jenis-penyakit:hover {
+    transform: scale(1.03);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+  }
+  .card-jenis-penyakit:hover .img-zoom {
+    transform: scale(1.08);
+  }
+
+  .card-panduan-penyakit:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+  }
+  .card-panduan-penyakit:hover .status-healthy {
+    box-shadow: 0 0 12px rgba(46, 125, 50, 0.4);
+  }
+  .card-panduan-penyakit:hover .status-warning {
+    box-shadow: 0 0 12px rgba(255, 193, 7, 0.4);
+  }
+  .card-panduan-penyakit:hover .status-danger {
+    box-shadow: 0 0 12px rgba(211, 47, 47, 0.4);
+  }
+}
+
+/* Drag & Drop Area on Scan */
+.animate-pulse-border {
+  animation: pulse-border-anim 1s infinite ease-in-out;
+}
+@keyframes pulse-border-anim {
+  0%, 100% { border-color: rgba(46, 125, 50, 1); opacity: 1; }
+  50% { border-color: rgba(46, 125, 50, 0.4); opacity: 0.7; }
+}
+
+.animate-bounce-icon {
+  animation: bounce-icon-anim 0.6s infinite ease-in-out;
+}
+@keyframes bounce-icon-anim {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-pulse-border, .animate-bounce-icon {
+    animation: none;
+  }
+}
+
+/* Leaf Spinner loading */
+.animate-leaf-spin {
+  animation: leaf-spin-anim 1.2s linear infinite;
+}
+@keyframes leaf-spin-anim {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .animate-leaf-spin {
+    animation: none;
+  }
+}
+
+/* Ellipsis loader dots */
+.loading-dots::after {
+  content: '';
+  animation: dots-anim 1.5s steps(4, end) infinite;
+}
+@keyframes dots-anim {
+  0%, 100% { content: ''; }
+  25% { content: '.'; }
+  50% { content: '..'; }
+  75% { content: '...'; }
+}
+
+/* Onboarding modal pulse button */
+.animate-pulse-button {
+  animation: pulse-button-anim 1.5s infinite ease-in-out;
+}
+@keyframes pulse-button-anim {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.04); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .animate-pulse-button {
+    animation: none;
+  }
+}
+

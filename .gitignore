@@ -1,0 +1,11 @@
+__pycache__/
+*.pyc
+.venv/
+venv/
+node_modules/
+dist/
+.env
+.env.local
+*.pid
+.stitch_ref/
+.train_results/
